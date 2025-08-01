@@ -27,7 +27,7 @@ Dataset: California Housing dataset (`sklearn.datasets`)
 Model: `sklearn.linear_model.LinearRegression`
 
 Project Structure
-
+```
 ├── .github/ # GitHub Actions workflows
 │ └── workflows/
 │ └── ci.yml # CI/CD pipeline definition
@@ -43,7 +43,7 @@ Project Structure
 ├── requirements.txt # Python dependencies
 ├── .gitignore # Files/directories to ignore in Git
 └── README.md # Project description and comparison table
-
+```
 
 CI/CD Pipeline Overview
 
