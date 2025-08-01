@@ -1,0 +1,41 @@
+name: MLOps Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run PyTest
+        run: |
+          pytest tests/
+
+  train_and_quantize:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          pip install -r requirements.txt
+          python src/train.py
+          python src/quantize.py
+
+  docker_test:
+    runs-on: ubuntu-latest
+    needs: train_and_quantize
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          pip install -r requirements.txt
+          docker build -t mlops-linear .
+          docker run mlops-linear
