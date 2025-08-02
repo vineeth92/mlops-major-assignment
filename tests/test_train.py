@@ -1,9 +1,10 @@
 import sys
 import os
-sys.path.append(r"C:\Users\Vineeth Varghese\mlops-major-assignment\src")
-
 import joblib
 from sklearn.linear_model import LinearRegression
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
+
 import train
 
 def test_model_instance():
